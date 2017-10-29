@@ -14,6 +14,9 @@ class Upspin < Formula
   end
 
   test do
-    system "#{bin}/upspin"
+    # Upspin requires a user to be configured and network availablity.
+    # Without that, this is a basic check to verify the command runs.
+    assert_match %r{^Usage of upspin}, shell_output("#{bin}/upspin -help 2>&1", 2)
+    assert_match %r{^Build time: Oct 27 21:33:19 UTC\nGit hash:   24e3a932a78985a544d207a704701ad8f7821388\n}, shell_output("#{bin}/upspin -version 2>&1", 2)
   end
 end
